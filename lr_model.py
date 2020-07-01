@@ -13,8 +13,7 @@ import shap
 import pickle
 
 
-aequas = """
-{
+aequas = {
           "attributeAudited" : "Age",
           "referenceGroup" : "under_forty",
           "fairnessThreshold" : "80%",
@@ -49,7 +48,6 @@ aequas = """
             "disparity" : 0.88
           } ]
         }
-"""
 
 
 #modelop.init
