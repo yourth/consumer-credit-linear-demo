@@ -13,6 +13,45 @@ import shap
 import pickle
 
 
+aequas = """
+{
+          "attributeAudited" : "Age",
+          "referenceGroup" : "under_forty",
+          "fairnessThreshold" : "80%",
+          "fairnessMeasures" : [ {
+            "label" : "Equal Parity",
+            "result" : "Failed",
+            "group" : "over_forty",
+            "disparity" : 0.67
+          }, {
+            "label" : "Proportional Parity",
+            "result" : "Passed",
+            "disparity" : 1.1
+          }, {
+            "label" : "False Positive Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 1.17
+          }, {
+            "label" : "False Discovery Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 0.82
+          }, {
+            "label" : "False Negative Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 1.1
+          }, {
+            "label" : "False Omission Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 0.88
+          } ]
+        }
+"""
+
+
 #modelop.init
 def begin():
     global explainer, lr_model, threshold, features, rent_ratio, gamma_args, \
@@ -56,12 +95,12 @@ def metrics(data):
        rc = [{'fpr': x[0], 'tpr': x[1]} for x in list(zip(fpr, tpr))]
        metrics['f1_score'] = f1
        metrics['confusion_matrix'] = cm
-       metrics['roc_auc'] = auc_val
-       metrics['roc_curve'] = rc
-       metrics['bias_metrics'] = get_bias_metrics(data)
+       metrics['auc'] = auc_val
+       metrics['ROC'] = rc
+       metrics['bias'] = get_bias_metrics(data)
 
     metrics['drift_metrics'] = get_drift_metrics(data)
-    metrics['shap_values'] = get_shap_values(data)
+    metrics['shap'] = get_shap_values(data)
     yield metrics
 
 
@@ -94,8 +133,9 @@ def get_bias_metrics(data):
                                             None).to_dict(orient='records')
     disp_metrics = disparity_metrics_df.where(pd.notnull(disparity_metrics_df),
                                             None).to_dict(orient='records')
-    return dict(absolute_metrics = abs_metrics,
-                disparity_metrics = disp_metrics)
+
+    return aequas
+
 
 def get_shap_values(data):
     shap_values = explainer.shap_values(data.loc[:, features])
