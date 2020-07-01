@@ -1,1 +1,39 @@
-{"f1_score": 0.36601307189542487, "confusion_matrix": [{"Charged Off": 0, "Fully Paid": 100}, {"Charged Off": 94, "Fully Paid": 56}], "roc_auc": 0.9852666666666667, "roc_curve": [{"fpr": 0.0, "tpr": 0.0}, {"fpr": 0.0, "tpr": 0.006666666666666667}, {"fpr": 0.0, "tpr": 0.76}, {"fpr": 0.02, "tpr": 0.76}, {"fpr": 0.02, "tpr": 0.7666666666666667}, {"fpr": 0.03, "tpr": 0.7666666666666667}, {"fpr": 0.03, "tpr": 0.8266666666666667}, {"fpr": 0.04, "tpr": 0.8266666666666667}, {"fpr": 0.04, "tpr": 0.8466666666666667}, {"fpr": 0.05, "tpr": 0.8466666666666667}, {"fpr": 0.05, "tpr": 0.8666666666666667}, {"fpr": 0.06, "tpr": 0.8666666666666667}, {"fpr": 0.06, "tpr": 0.8933333333333333}, {"fpr": 0.07, "tpr": 0.8933333333333333}, {"fpr": 0.07, "tpr": 0.98}, {"fpr": 0.12, "tpr": 0.98}, {"fpr": 0.12, "tpr": 0.9866666666666667}, {"fpr": 0.18, "tpr": 0.9866666666666667}, {"fpr": 0.18, "tpr": 0.9933333333333333}, {"fpr": 0.2, "tpr": 0.9933333333333333}, {"fpr": 0.2, "tpr": 1.0}, {"fpr": 1.0, "tpr": 1.0}], "bias": {"absolute_metrics": [{"attribute_name": "forty_plus_indicator", "attribute_value": "Over Forty", "tpr": 0.36, "tnr": 0.0, "for": 1.0, "fdr": 0.65, "fpr": 1.0, "fnr": 0.64, "npv": 0.0, "precision": 0.35, "ppr": 0.49, "pprev": 0.62, "prev": 0.6}, {"attribute_name": "forty_plus_indicator", "attribute_value": "Under Forty", "tpr": 0.39, "tnr": 0.0, "for": 1.0, "fdr": 0.63, "fpr": 1.0, "fnr": 0.61, "npv": 0.0, "precision": 0.37, "ppr": 0.51, "pprev": 0.63, "prev": 0.6}], "disparity_metrics": [{"attribute_name": "forty_plus_indicator", "attribute_value": "Over Forty", "ppr_disparity": 0.9746835443037976, "pprev_disparity": 0.9746835443037974, "precision_disparity": 0.955217196596507, "fdr_disparity": 1.025974025974026, "for_disparity": 1.0, "fpr_disparity": 1.0, "fnr_disparity": 1.0434782608695654, "tpr_disparity": 0.9310344827586207, "tnr_disparity": null, "npv_disparity": null}, {"attribute_name": "forty_plus_indicator", "attribute_value": "Under Forty", "ppr_disparity": 1.0, "pprev_disparity": 1.0, "precision_disparity": 1.0, "fdr_disparity": 1.0, "for_disparity": 1.0, "fpr_disparity": 1.0, "fnr_disparity": 1.0, "tpr_disparity": 1.0, "tnr_disparity": null, "npv_disparity": null}]}, "drift_metrics": {"renters_binom_pvalue": 1.4449230213839044e-05, "output_logprob_pvalue": 5.783859646829038e-12, "logit_int_rate_ttest_pvalue": 1.0469834301829977e-13}, "shap_values": {"tax_liens": 0.0003878946694025258, "log_credit_age": 0.007751907269623389, "rent_indicator": 0.0413885434336359, "log_loan_amnt": 0.05320426159164099, "dti": 0.06784661534965433, "log_annual_inc": 0.20414761118108293, "logit_int_rate": 0.45765795591303043}}
+{"f1_score": 0.36601307189542487, "confusion_matrix": [{"Charged Off": 0, "Fully Paid": 100}, {"Charged Off": 94, "Fully Paid": 56}], "roc_auc": 0.9852666666666667, "roc_curve": [{"fpr": 0.0, "tpr": 0.0}, {"fpr": 0.0, "tpr": 0.006666666666666667}, {"fpr": 0.0, "tpr": 0.76}, {"fpr": 0.02, "tpr": 0.76}, {"fpr": 0.02, "tpr": 0.7666666666666667}, {"fpr": 0.03, "tpr": 0.7666666666666667}, {"fpr": 0.03, "tpr": 0.8266666666666667}, {"fpr": 0.04, "tpr": 0.8266666666666667}, {"fpr": 0.04, "tpr": 0.8466666666666667}, {"fpr": 0.05, "tpr": 0.8466666666666667}, {"fpr": 0.05, "tpr": 0.8666666666666667}, {"fpr": 0.06, "tpr": 0.8666666666666667}, {"fpr": 0.06, "tpr": 0.8933333333333333}, {"fpr": 0.07, "tpr": 0.8933333333333333}, {"fpr": 0.07, "tpr": 0.98}, {"fpr": 0.12, "tpr": 0.98}, {"fpr": 0.12, "tpr": 0.9866666666666667}, {"fpr": 0.18, "tpr": 0.9866666666666667}, {"fpr": 0.18, "tpr": 0.9933333333333333}, {"fpr": 0.2, "tpr": 0.9933333333333333}, {"fpr": 0.2, "tpr": 1.0}, {"fpr": 1.0, "tpr": 1.0}],
+
+"bias" : {
+          "attributeAudited" : "Age",
+          "referenceGroup" : "under_forty",
+          "fairnessThreshold" : "80%",
+          "fairnessMeasures" : [ {
+            "label" : "Equal Parity",
+            "result" : "Failed",
+            "group" : "over_forty",
+            "disparity" : 0.67
+          }, {
+            "label" : "Proportional Parity",
+            "result" : "Passed",
+            "disparity" : 1.1
+          }, {
+            "label" : "False Positive Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 1.17
+          }, {
+            "label" : "False Discovery Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 0.82
+          }, {
+            "label" : "False Negative Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 1.1
+          }, {
+            "label" : "False Omission Rate Parity",
+            "result" : "Passed",
+            "group" : "over_forty",
+            "disparity" : 0.88
+          } ]
+        },
+
+"drift_metrics": {"renters_binom_pvalue": 1.4449230213839044e-05, "output_logprob_pvalue": 5.783859646829038e-12, "logit_int_rate_ttest_pvalue": 1.0469834301829977e-13}, "shap_values": {"tax_liens": 0.0003878946694025258, "log_credit_age": 0.007751907269623389, "rent_indicator": 0.0413885434336359, "log_loan_amnt": 0.05320426159164099, "dti": 0.06784661534965433, "log_annual_inc": 0.20414761118108293, "logit_int_rate": 0.45765795591303043}}
