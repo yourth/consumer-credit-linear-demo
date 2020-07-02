@@ -47,7 +47,7 @@ aequas = {
             "group" : "over_forty",
             "disparity" : 0.88
           } ]
-        }
+            }
 
 
 #modelop.init
