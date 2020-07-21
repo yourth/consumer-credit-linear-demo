@@ -9,6 +9,7 @@ from aequitas.bias import Bias
 from scipy.stats import binom_test
 from scipy.stats import kstest
 from scipy.stats import ttest_1samp
+from scipy.special import logit
 import shap
 import pickle
 
@@ -30,11 +31,22 @@ def begin():
 #modelop.score
 def score(datum):
     datum = pd.DataFrame(datum, index=[0])
+    prep_datum = preprocess(datum)
+    datum = pd.concat([datum, prep_datum], axis=1)
     datum['probability'] = prediction(datum)
     datum['prediction'] = datum.probability \
                           .apply(lambda x: x > threshold).astype(int)
     yield datum.loc[:, ['id', 'probability', 'prediction']] \
             .to_dict(orient='records')
+
+def preprocess(data):
+    prep_data = pd.DataFrame(index=data.index)
+    prep_data["logit_int_rate"] = data.int_rate.apply(logit)
+    prep_data["log_annual_inc"] = data.annual_inc.apply(np.log)
+    prep_data["log_credit_age"] = data.credit_age.apply(np.log)
+    prep_data["log_loan_amnt"] = data.loan_amnt.apply(np.log)
+    prep_data["rent_indicator"] = data.home_ownership.isin(['RENT']).astype(int)
+    return prep_data
 
 def prediction(data):
     return lr_model.predict_proba(data.loc[:, features])[:,1]
@@ -42,10 +54,13 @@ def prediction(data):
 #modelop.metrics
 def metrics(data):
     metrics = {}
+    prep_data = preprocess(data)
+    data = pd.concat([data, prep_data], axis=1)
     data.loc[:, 'probabilities'] = prediction(data)
     data.loc[:, 'predictions'] = data.probabilities \
                                      .apply(lambda x: threshold > x) \
                                      .astype(int)
+    
     if is_validated(data):
        f1 = f1_score(data.loan_status, data.predictions)
        cm = confusion_matrix(data.loan_status, data.predictions)
