@@ -29,7 +29,7 @@ def begin():
     pass
 
 #modelop.score
-def score(datum):
+def action(datum):
     datum = pd.DataFrame(datum, index=[0])
     prep_datum = preprocess(datum)
     datum = pd.concat([datum, prep_datum], axis=1)
@@ -51,7 +51,6 @@ def preprocess(data):
 def prediction(data):
     return lr_model.predict_proba(data.loc[:, features])[:,1]
 
-#changes
 #modelop.metrics
 def metrics(data):
     metrics = {}
