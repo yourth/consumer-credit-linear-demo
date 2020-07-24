@@ -83,6 +83,7 @@ def metrics(data):
 def is_validated(data):
     return ('loan_status' in data.columns)
 
+# A comment
 def get_bias_metrics(data):
     bias = Bias()
     group = Group()
