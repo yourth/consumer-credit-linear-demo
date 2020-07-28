@@ -13,7 +13,6 @@ from scipy.special import logit
 import shap
 import pickle
 
-# git test
 #modelop.init
 def begin():
     global explainer, lr_model, threshold, features, rent_ratio, gamma_args, \
@@ -83,7 +82,6 @@ def metrics(data):
 def is_validated(data):
     return ('loan_status' in data.columns)
 
-# A comment
 def get_bias_metrics(data):
     bias = Bias()
     group = Group()
