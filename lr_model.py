@@ -63,19 +63,19 @@ def metrics(data):
     if is_validated(data):
        f1 = f1_score(data.loan_status, data.predictions)
        cm = confusion_matrix(data.loan_status, data.predictions)
-       labels = ['Charged Off', 'Fully Paid']
+       labels = ['Fully Paid', 'Charged Off']
        cm = matrix_to_dicts(cm, labels)
        fpr, tpr, thres = roc_curve(data.loan_status, data.probabilities)
        auc_val = roc_auc_score(data.loan_status, data.probabilities)
        rc = [{'fpr': x[0], 'tpr': x[1]} for x in list(zip(fpr, tpr))]
        metrics['f1_score'] = f1
        metrics['confusion_matrix'] = cm
-       metrics['roc_auc'] = auc_val
-       metrics['roc_curve'] = rc
-       metrics['bias_metrics'] = get_bias_metrics(data)
+       metrics['auc'] = auc_val
+       metrics['ROC'] = rc
+       metrics['bias'] = get_bias_metrics(data)
 
     metrics['drift_metrics'] = get_drift_metrics(data)
-    metrics['shap_values'] = get_shap_values(data)
+    metrics['shap'] = get_shap_values(data)
     yield metrics
 
 
