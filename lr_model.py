@@ -16,7 +16,6 @@ from scipy.special import logit
 import shap
 import pickle
 
-# A comment
 
 #modelop.init
 def begin():
@@ -41,7 +40,7 @@ def action(datum):
     datum['prediction'] = datum.probability \
                           .apply(lambda x: x > threshold).astype(int)
     yield datum.loc[:, ['id', 'probability', 'prediction']] \
-            .to_dict(orient='records')
+            .to_dict(orient='records')[0]
 
 def preprocess(data):
     prep_data = pd.DataFrame(index=data.index)
