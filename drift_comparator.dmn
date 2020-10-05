@@ -5,12 +5,12 @@
       <biodi:bounds x="150" y="150" width="180" height="80" />
     </extensionElements>
     <decisionTable id="decisionTable_1" hitPolicy="COLLECT">
-      <input id="input_1" label="auc" camunda:inputVariable="auc">
+      <input id="input_1" label="dti_p-value" camunda:inputVariable="dti_p-value">
         <inputExpression id="inputExpression_1" typeRef="double" expressionLanguage="feel">
           <text></text>
         </inputExpression>
       </input>
-      <input id="InputClause_08e7ybd" label="f1_score" camunda:inputVariable="f1_score">
+      <input id="InputClause_08e7ybd" label="annual_inc_p-value" camunda:inputVariable="annual_inc_p-value">
         <inputExpression id="LiteralExpression_0nr86e9" typeRef="double" expressionLanguage="feel">
           <text></text>
         </inputExpression>
@@ -19,7 +19,7 @@
       <output id="OutputClause_05h1co6" label="reason" name="reason" typeRef="string" />
       <rule id="DecisionRule_0aznir8">
         <inputEntry id="UnaryTests_1x4xf13">
-          <text>&lt;= 0.65</text>
+          <text>&lt;= 0.05</text>
         </inputEntry>
         <inputEntry id="UnaryTests_1wcb8sj">
           <text></text>
@@ -28,7 +28,7 @@
           <text>false</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_07v4w07">
-          <text>"AUC under threshold of 0.90"</text>
+          <text>"DTI p-value under 0.05"</text>
         </outputEntry>
       </rule>
       <rule id="DecisionRule_0ggwcp6">
@@ -36,13 +36,13 @@
           <text></text>
         </inputEntry>
         <inputEntry id="UnaryTests_1u0j72q">
-          <text>&lt;= 0.20</text>
+          <text>&lt;= 0.05</text>
         </inputEntry>
         <outputEntry id="LiteralExpression_1id0elh">
           <text>false</text>
         </outputEntry>
         <outputEntry id="LiteralExpression_1qpb76t">
-          <text>"F1 under threshold of 0.20"</text>
+          <text>"Annual Income p-value under 0.05"</text>
         </outputEntry>
       </rule>
     </decisionTable>
